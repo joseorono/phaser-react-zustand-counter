@@ -50,11 +50,8 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
 
     useEffect(() =>
     {
-        EventBus.on('counter-increase', () => {
-            console.log('Increasing Counter from PhaserGame component...');
-            
+        EventBus.on('counter-increase', () => {            
             increaseFromOutsideReact();
-
             console.log('Counter increased from PhaserGame component');
            
         });
@@ -79,6 +76,7 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
         });
         return () =>
         {
+            EventBus.removeListener('counter-increase');
             EventBus.removeListener('current-scene-ready');
         }
     }, [currentActiveScene, ref]);

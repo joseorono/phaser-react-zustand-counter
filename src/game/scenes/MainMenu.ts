@@ -33,7 +33,7 @@ export class MainMenu extends Scene
             align: 'center'
         }).setOrigin(0.5).setDepth(100).setInteractive();
     
-        this.countBtn.on('pointerover', () => { EventBus.emit('counter-increase'); });
+        this.countBtn.on('pointerdown', (pointer:any) => { console.log("test"); EventBus.emit('counter-increase'); });
 
         EventBus.emit('current-scene-ready', this);
         
