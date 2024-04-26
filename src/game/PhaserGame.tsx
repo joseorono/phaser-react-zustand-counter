@@ -1,6 +1,7 @@
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import StartGame from './main';
 import { EventBus } from './EventBus';
+import { increaseFromOutsideReact } from '~/store/useStore';
 
 export interface IRefPhaserGame
 {
@@ -49,6 +50,15 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
 
     useEffect(() =>
     {
+        EventBus.on('counter-increase', () => {
+            console.log('Increasing Counter from PhaserGame component...');
+            
+            increaseFromOutsideReact();
+
+            console.log('Counter increased from PhaserGame component');
+           
+        });
+
         EventBus.on('current-scene-ready', (scene_instance: Phaser.Scene) =>
         {
             if (currentActiveScene && typeof currentActiveScene === 'function')

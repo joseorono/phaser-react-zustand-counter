@@ -7,6 +7,7 @@ export class MainMenu extends Scene
     background: GameObjects.Image;
     logo: GameObjects.Image;
     title: GameObjects.Text;
+    countBtn: GameObjects.Text;
     logoTween: Phaser.Tweens.Tween | null;
 
     constructor ()
@@ -26,7 +27,16 @@ export class MainMenu extends Scene
             align: 'center'
         }).setOrigin(0.5).setDepth(100);
 
+        this.countBtn = this.add.text(512, 560, '+ Counter', {
+            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5).setDepth(100).setInteractive();
+    
+        this.countBtn.on('pointerover', () => { EventBus.emit('counter-increase'); });
+
         EventBus.emit('current-scene-ready', this);
+        
     }
     
     changeScene ()
